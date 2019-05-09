@@ -38,6 +38,7 @@ class SSH_Client:
     def recv(self, timeout):
         signal.alarm(timeout)
         response = self.__shell.recv(SSH_Client.__BUFFER_SIZE)
+        signal.alarm(0) # desliga alarme
         return response.decode('utf-8')
 
     def exec(self, cmd):
