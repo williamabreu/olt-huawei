@@ -32,3 +32,18 @@ class RTT(threading.Thread):
 
     def get_estimation(self):
         return self.__mean + 4 * self.__var**0.5
+
+    def dbg(self):
+        print('média:', self.__mean)
+        print('desvio:', self.__var**0.5)
+        print('num.:', self.__num_samples)
+
+if __name__ == '__main__':
+    import sys, time
+    rtt = RTT(sys.argv[1])
+    rtt.start()
+    for i in range(int(sys.argv[2])):
+        time.sleep(11)
+        rtt.dbg()
+    rtt.stop()
+    print(rtt.get_estimation())
